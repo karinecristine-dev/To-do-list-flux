@@ -71,7 +71,7 @@ export function TaskListPage() {
                       )}
                       <Button
                         size="sm"
-                        variant="destructive"
+                        variant="outline"
                         onClick={() =>
                           dispatch({ type: "DELETE_TODO", payload: { id: task.id } })
                         }
