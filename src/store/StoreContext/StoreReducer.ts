@@ -1,17 +1,12 @@
 import type { DispatchT,  TodosState } from "./StoreContext";
 
 
-type reducerProps = {
-    state: TodosState;
-    action: DispatchT;
-}
-
-type ReducerAction = (props: reducerProps) => TodosState;
 
 
-export const reducer: ReducerAction = (
-  {state, action} 
- ) => {
+
+export const reducer= (
+  state: TodosState, action: DispatchT
+ ): TodosState => {
   switch (action.type) {
     case "ADD_TODO":
       return {

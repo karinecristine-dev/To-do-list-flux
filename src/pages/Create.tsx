@@ -9,28 +9,10 @@ import { Save, X } from "lucide-react";
 import { StoreContext } from "../store/StoreContext/StoreContext";
 
 export function CreateTaskPage() {
-  const { dispatch } = useContext(StoreContext);
-  const navigate = useNavigate();
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const handleSave = () => {
-    if (name.trim()) {
-      dispatch({
-        type: "ADD_TODO",
-        payload: { title: name.trim(), description: description.trim() },
-      });
-      setName("");
-      setDescription("");
-      navigate("/list");
-    }
-  };
-
-  const handleCancel = () => {
-    setName("");
-    setDescription("");
-    navigate("/list");
-  };
+  const navigate = useNavigate();
+  const { dispatch } = useContext(StoreContext);
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -44,8 +26,8 @@ export function CreateTaskPage() {
             <Input
               id="task-name"
               placeholder="Digite o nome da tarefa..."
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
 
@@ -61,11 +43,14 @@ export function CreateTaskPage() {
           </div>
 
           <div className="flex gap-2 justify-end">
-            <Button variant="outline" onClick={handleCancel}>
+            <Button variant="outline" onClick={() => navigate("/list")}>
               <X className="size-4 mr-2" />
               Cancelar
             </Button>
-            <Button onClick={handleSave} disabled={!name.trim()}>
+            <Button variant="outline" onClick={() => {
+              dispatch({ type: "ADD_TODO", payload: { title, description } });
+              navigate("/list");
+            }}>
               <Save className="size-4 mr-2" />
               Salvar
             </Button>

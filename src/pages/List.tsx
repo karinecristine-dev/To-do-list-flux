@@ -22,7 +22,7 @@ export function TaskListPage() {
               {activeTasks} ativas, {completedTasks} concluídas
             </div>
           </div>
-          <Button onClick={() => navigate("/create")} className=" flex items-center gap-2">
+          <Button variant="outline" onClick={() => navigate("/create")} className=" flex items-center gap-2">
             <Plus className="size-4 mr-2" />
             Nova Tarefa
           </Button>
@@ -77,6 +77,7 @@ export function TaskListPage() {
                         }
                       >
                         <Trash2 className="size-4" />
+                        Deletar
                       </Button>
                     </div>
                   </div>

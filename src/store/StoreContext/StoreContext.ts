@@ -28,15 +28,16 @@ export type DispatchT = {
         payload: DispatchPayload[K];
     }
 }[DispatchType];
-//Tirar o tipo de payload do dispatch, e deixar ele como um objeto genérico, para que possa ser usado em qualquer tipo de ação. O tipo de ação vai ser definido pelo type, e o payload vai ser um objeto genérico, que pode conter qualquer tipo de dado, dependendo da ação. O reducer vai ser responsável por interpretar o tipo de ação e o payload, e atualizar o estado global de acordo com a ação.
+//Tirar o tipo de payload do dispatch, e deixar ele como um objeto genérico, 
+// para que possa ser usado em qualquer tipo de ação. O tipo de ação vai ser definido pelo type, 
+// e o payload vai ser um objeto genérico, que pode conter qualquer tipo de dado, dependendo da ação. 
+// O reducer vai ser responsável por interpretar o tipo de ação e o payload, e atualizar o estado global de acordo com a ação.
 
 export type TodosState = {
     todos: Todo[];
 }
 
-// export type StoreContextType = TodosState & {
-//     dispatch: React.Dispatch<DispatchT>;
-// }
+
 
 export type StoreContextType = {
     state: TodosState;
@@ -44,19 +45,19 @@ export type StoreContextType = {
 } 
 
  const initialTodosState: TodosState = {
-    todos: [ 
+    todos: [
         {
-            id: 1, 
-            title: "Learn React",
-            completed: false,
-            description: "Learning React is essential for building modern web applications. It allows developers to create reusable UI components and manage state effectively."
+            id: 1,
+            title: "Exemplo de Tarefa",
+            description: "Esta é uma tarefa de exemplo para demonstrar o funcionamento do aplicativo.",
+            completed: false
         },
         {
-            id: 2, 
-            title: "Learn TypeScript",
-            completed: false,
-            description: "Learning TypeScript is essential for building modern web applications. It allows developers to create reusable UI components and manage state effectively."
-        },
+            id: 2,
+            title: "Tarefa Concluída",
+            description: "Esta tarefa já foi concluída para mostrar o estado de conclusão.",
+            completed: true
+        }
     ],
 }
 
@@ -64,6 +65,7 @@ export const initialStoreContext: StoreContextType = {
     state: initialTodosState,
     dispatch: () => {},
 }
+
 
 export const StoreContext = React.createContext<StoreContextType>(initialStoreContext);
     
