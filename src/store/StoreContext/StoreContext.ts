@@ -44,7 +44,9 @@ export type StoreContextType = {
     dispatch: React.Dispatch<DispatchT>;
 } 
 
- const initialTodosState: TodosState = {
+export const STORAGE_KEY = "todo-list:todos";
+
+const fallbackInitialTodosState: TodosState = {
     todos: [
         {
             id: 1,
@@ -59,10 +61,26 @@ export type StoreContextType = {
             completed: true
         }
     ],
-}
+};
+
+export const getInitialTodosState = (): TodosState => {
+    if (typeof window === "undefined") return fallbackInitialTodosState;
+
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return fallbackInitialTodosState;
+
+        const parsed = JSON.parse(saved) as TodosState;
+        if (!parsed || !Array.isArray(parsed.todos)) return fallbackInitialTodosState;
+
+        return parsed;
+    } catch {
+        return fallbackInitialTodosState;
+    }
+};
 
 export const initialStoreContext: StoreContextType = {
-    state: initialTodosState,
+    state: getInitialTodosState(),
     dispatch: () => {},
 }
 

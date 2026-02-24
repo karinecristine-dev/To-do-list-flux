@@ -6,8 +6,8 @@ export const StoreContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [state, dispatch] = React.useReducer(reducer, initialStoreContext.state);
   
   React.useEffect(() => {
-    localStorage.setItem("todo-list:todos", JSON.stringify(state.todos));
-  }, [state.todos]);
+    localStorage.setItem("todo-list:todos", JSON.stringify(state));
+  }, [state]);
 
   return (
     <StoreContext.Provider value={{ state, dispatch }}>
